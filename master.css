@@ -152,8 +152,8 @@ form .btn:hover {
   line-height: 40px; 
 }
 
-.mt-5 {
-  margin-top: -4rem !important;
+#Skills .row {
+  margin-top: 40px;
 }
  
 .navbar {
@@ -193,4 +193,5 @@ form .btn:hover {
   0%   {opacity: 0; transform: translateY(20px);}
   100% {opacity: 1; transform: translateY(0);}
 }
+
 
