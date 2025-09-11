@@ -15,11 +15,11 @@ section {
 
 .service-box {
   border-radius: 20px;
-  transition: transform 0.3s ease;
-  margin-top: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .service-box:hover {
   transform: translateY(-8px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
 }
 .service-box i {
   color: dodgerblue;
