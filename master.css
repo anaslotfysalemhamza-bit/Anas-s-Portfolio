@@ -77,6 +77,7 @@ form .btn:hover {
 
 .shadow-box-1{
   padding: 70px;
+  margin-top: 0px;
   border-radius: 20px;
   background-color: rgba(32, 41, 59, 0.9);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -194,3 +195,31 @@ form .btn:hover {
   100% {opacity: 1; transform: translateY(0);}
 }
 
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-link {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.15);
+}
+
+.social-link.linkedin:hover { background-color: #0077b5; }
+.social-link.github:hover { background-color: #333; }
+.social-link.email:hover { background-color: #d44638; }
+.social-link.whatsapp:hover { background-color: #25d366; }
