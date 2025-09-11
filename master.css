@@ -13,6 +13,19 @@ section {
   background-repeat: no-repeat;
 }
 
+.service-box {
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+  margin-top: 20px;
+}
+.service-box:hover {
+  transform: translateY(-8px);
+}
+.service-box i {
+  color: dodgerblue;
+}
+
+
 form {
   max-width: 600px;
   margin: auto;
