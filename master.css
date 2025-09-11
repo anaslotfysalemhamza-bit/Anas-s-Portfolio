@@ -145,10 +145,11 @@ section {
 }
 
 .gy-5 {
-  --bs-gutter-y: 4rem;
+  --bs-gutter-y: -4rem;
 }
  
 @keyframes Anas3 {
   0%   {opacity: 0; transform: translateY(20px);}
   100% {opacity: 1; transform: translateY(0);}
 }
+
