@@ -142,22 +142,25 @@ form .btn:hover {
   animation: Anas3 5s ease-in-out forwards;
 }
 
-
 .skill-category {
   font-weight: bold;
   margin-bottom: 20px;
   color: dodgerblue;
   text-align: left;
+  margin-top: 50px;
 }
 
 .skill-item {
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-top: 70px; 
 }
 
 .skill-icon {
   color: dodgerblue;
+  min-width: 35px;
+  text-align: center;
 }
 
 .skill-bar {
@@ -174,8 +177,10 @@ form .btn:hover {
   font-weight: bold;
   text-align: center;
   color: white;
-  width: 80%;
+  width: 0%; 
+  transition: width 3s ease;
 }
+
 
 .bg-html { background-color: #E34F26; }
 .bg-css { background-color: #1572B6; }
@@ -262,5 +267,4 @@ form .btn:hover {
   0%   {opacity: 0; transform: translateY(20px);}
   100% {opacity: 1; transform: translateY(0);}
 }
-
 
