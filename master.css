@@ -2,6 +2,7 @@ body {
   scroll-behavior: smooth;
   background-color: #0a192f;
   color: white;
+  padding-top: 80px;
 }
 
 section {
@@ -142,6 +143,7 @@ form .btn:hover {
   animation: Anas3 5s ease-in-out forwards;
 }
 
+
 .skill-category {
   font-weight: bold;
   margin-bottom: 20px;
@@ -154,7 +156,6 @@ form .btn:hover {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-top: 70px; 
 }
 
 .skill-icon {
