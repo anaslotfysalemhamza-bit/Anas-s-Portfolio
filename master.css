@@ -137,12 +137,10 @@ form .btn:hover {
   color: #ffffffcc;
 }
 
-.Wellcome {
-  color: white;
-  opacity: 0;
-  animation: Anas3 5s ease-in-out forwards;
+.slide-in-left {
+  animation: slide-in-left 2s cubic-bezier(0.25, 1, 0.5, 1) both;
+  font-size: 2rem;  
 }
-
 
 .skill-category {
   font-weight: bold;
@@ -264,8 +262,14 @@ form .btn:hover {
 .social-link.email:hover { background-color: #d44638; }
 .social-link.whatsapp:hover { background-color: #25d366; }
  
-@keyframes Anas3 {
-  0%   {opacity: 0; transform: translateY(20px);}
-  100% {opacity: 1; transform: translateY(0);}
+@keyframes slide-in-left {
+  0% {
+  transform: translateX(-1000px);
+  opacity: 0;
+  }
+  100% {
+  transform: translateX(0);
+  opacity: 1;
+  }
 }
 
