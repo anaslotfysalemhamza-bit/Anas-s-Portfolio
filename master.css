@@ -1,4 +1,4 @@
-body {
+body {body {
   scroll-behavior: smooth;
   background-color: #0a192f;
   color: white;
@@ -82,7 +82,7 @@ form .btn:hover {
 .shadow-box {
   padding: 40px;
   border-radius: 20px;
-  margin: -12px;
+  margin-top: 30px;
   background-color: rgba(32, 41, 59, 0.9);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   color: white;
@@ -117,7 +117,7 @@ form .btn:hover {
 .info-box {
   background: rgba(255, 255, 255, 0.08);
   padding: 16px;
-  border-radius: 16px;
+  border-radius: 20px;
   font-size: 14px;
   color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -142,34 +142,47 @@ form .btn:hover {
 }
 
 
-.progress {
+.skill-category {
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: dodgerblue;
+  text-align: left;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.skill-icon {
+  color: dodgerblue;
+}
+
+.skill-bar {
+  flex: 1;
   height: 30px;
   border-radius: 15px;
+  background-color: rgba(255,255,255,0.1);
   overflow: hidden;
 }
 
 .progress-bar {
-  font-weight: bold;
-  font-size: 14px;
+  height: 100%;
   line-height: 30px;
-}
-
-.skill-bar {
-  height: 40px; 
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.skill-bar .progress-bar {
   font-weight: bold;
-  font-size: 16px;
-  line-height: 40px; 
+  text-align: center;
+  color: white;
+  width: 80%;
 }
 
-#Skills .row {
-  margin-top: 40px;
-}
- 
+.bg-html { background-color: #E34F26; }
+.bg-css { background-color: #1572B6; }
+.bg-bootstrap { background-color: #6610f2; }
+.bg-typing { background-color: #20c997; }
+.bg-canva { background-color: #00C4CC; }
+.bg-basic { background-color: #ffc107; }
+
 .navbar {
   background-color: #0a192f;
   border-bottom: 2px solid dodgerblue; 
@@ -248,3 +261,4 @@ form .btn:hover {
   0%   {opacity: 0; transform: translateY(20px);}
   100% {opacity: 1; transform: translateY(0);}
 }
+
