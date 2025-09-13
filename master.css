@@ -2,7 +2,7 @@ body {
   scroll-behavior: smooth;
   background-color: #0a192f;
   color: white;
-  padding-top: 80px;
+  padding-top: Auto;
 }
 
 section {
@@ -303,4 +303,43 @@ form .btn:hover {
   }
 }
 
+.go-btn {
+  display: none;
+  margin-top: 12px;
+  padding: 6px 16px;
+  background-color: dodgerblue;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
 
+.go-btn:hover {
+  background-color: #1a73e8;
+  transform: scale(1.1);
+}
+
+
+.service-box:hover .go-btn {
+  display: inline-block;
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-box:hover .service-text {
+  filter: blur(2px);
+  transition: filter 0.3s ease;
+}
