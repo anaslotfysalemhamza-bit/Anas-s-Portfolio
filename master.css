@@ -137,7 +137,6 @@ form .btn:hover {
 .slide-in-left {
   animation: slide-in-left 2s cubic-bezier(0.25, 1, 0.5, 1) both;
   font-size: 2rem;  
-  color: dodgerblue;
 }
 
 .Contact{
@@ -303,4 +302,5 @@ form .btn:hover {
   opacity: 1;
   }
 }
+
 
