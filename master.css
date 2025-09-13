@@ -105,7 +105,7 @@ form .btn:hover {
   border-radius: 20px;
   background-color: rgba(32, 41, 59, 0.9);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  color: white;
+  color: dodgerblue;
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -130,16 +130,35 @@ form .btn:hover {
   transform: scale(1.03);
 }
 
-.info-box span {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 6px;
-  color: #ffffffcc;
+.About{
+  color: dodgerblue;
 }
 
 .slide-in-left {
   animation: slide-in-left 2s cubic-bezier(0.25, 1, 0.5, 1) both;
   font-size: 2rem;  
+  color: dodgerblue;
+}
+
+.Contact{
+  color: dodgerblue;
+}
+
+.Service{
+  color: dodgerblue;
+  transition: transform 0.2s ease;
+}
+
+.Service:hover{
+  transform: scale(1.03);
+}
+
+.My-Skills {
+  transition: transform 0.2s ease;
+}
+
+.My-Skills:hover{
+  transform: scale(1.03);
 }
 
 .skill-category {
@@ -148,12 +167,22 @@ form .btn:hover {
   color: dodgerblue;
   text-align: left;
   margin-top: 50px;
+  transition: transform 0.2s ease;
+}
+
+.skill-category:hover{
+  transform: scale(1.03);
 }
 
 .skill-item {
   display: flex;
   align-items: center;
   gap: 15px;
+  transition: transform 0.2s ease;
+}
+
+.skill-item:hover{
+  transform: scale(1.03);
 }
 
 .skill-icon {
@@ -185,7 +214,9 @@ form .btn:hover {
 .bg-bootstrap { width: 70%; background-color: #6610f2; }
 .bg-typing { width: 90%; background-color: #20c997; }
 .bg-canva { width: 90%; background-color: #00C4CC; }
-.bg-basic { width: 95%; background-color: #ffc107; }
+.bg-basic { width: 95%; background-color: #007BFF; }
+.bg-Powerpoint{width: 90% ; background-color: #d24726;}
+.bg-Office{width: 70%; background-color: #00A4EF;}
 
 
 .navbar {
