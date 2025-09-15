@@ -213,7 +213,7 @@ form .btn:hover {
 .bg-bootstrap { width: 70%; background-color: #6610f2; }
 .bg-typing { width: 90%; background-color: #20c997; }
 .bg-canva { width: 90%; background-color: #00C4CC; }
-.bg-basic { width: 95%; background-color: #007BFF; }
+.bg-basic { width: 90%; background-color: #007BFF; }
 .bg-Powerpoint{width: 90% ; background-color: #d24726;}
 .bg-Office{width: 70%; background-color: #00A4EF;}
 
@@ -342,4 +342,18 @@ form .btn:hover {
 .service-box:hover .service-text {
   filter: blur(2px);
   transition: filter 0.3s ease;
+}
+
+.Anas-1{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.Anas{
+  color: dodgerblue;
+  border-top: 2px solid dodgerblue; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  height: 67px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
