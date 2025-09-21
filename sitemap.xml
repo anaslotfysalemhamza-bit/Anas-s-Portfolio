@@ -1,19 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- الصفحة الرئيسية -->
   <url>
     <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/</loc>
     <priority>1.0</priority>
   </url>
+
+  <!-- الصفحات الداخلية (Services) -->
   <url>
-    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/about</loc>
+    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/html-skill.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/portfolio</loc>
+    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/design.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/contact</loc>
+    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/typing.html</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/bootstrap.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/responsive.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://anaslotfysalemhamza-bit.github.io/Anas-s-Portfolio/computer.html</loc>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
+
+
