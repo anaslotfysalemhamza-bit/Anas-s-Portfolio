@@ -511,9 +511,3 @@ form .btn:hover {
     opacity: 1;
   }
 }
-
-@media (max-width: 768px) {
-  .shadow-box, .shadow-box-1 {
-    padding: 20px;
-  }
-}
