@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,11 +26,12 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#Home"><b>Home</b></a></li>
-          <li class="nav-item"><a class="nav-link" href="#About"><b>About</b></a></li>
-          <li class="nav-item"><a class="nav-link" href="#Skills"><b>Skills</b></a></li>
-          <li class="nav-item"><a class="nav-link" href="#Service"><b>Service</b></a></li>
-          <li class="nav-item"><a class="nav-link" href="#Contact"><b>Contact</b></a></li>
+          <li class="nav-item"><a class="nav-link A" href="#Home"><b>Home</b></a></li>
+          <li class="nav-item"><a class="nav-link B" href="#About"><b>About</b></a></li>
+          <li class="nav-item"><a class="nav-link C" href="#Skills"><b>Skills</b></a></li>
+          <li class="nav-item"><a class="nav-link D" href="#Service"><b>Service</b></a></li>
+          <li class="nav-item"><a class="nav-link F" href="#Projects"><b>Projects</b></a></li>
+          <li class="nav-item"><a class="nav-link E" href="#Contact"><b>Contact</b></a></li>
         </ul>
       </div>
     </div>
@@ -247,6 +248,35 @@
     </div>
   </section>
 
+<section id="Projects">
+  <div class="container text-center">
+    <h2 class="Projects"><b>My Projects</b></h2>
+    <p class="mb-5">Here are some of the projects I've worked on 👇</p>
+
+    <div class="row g-4">
+
+      <div class="col-md-6">
+        <div class="project-box">
+          <img src="Screenshot 2025-09-23 012217.png" alt="City Skyline" class="project-img">
+          <h4>City Skyline</h4>
+          <p class="Project-text">A CSS project that builds a city skyline using only HTML & CSS.</p>
+          <a href="city-skyline.html" class="Project-Visit">Visit</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="project-box">
+          <img src="Screenshot 2025-09-23 154946.png" alt="Responsive Portfolio" class="project-img">
+          <h4>Responsive Portfolio</h4>
+          <p class="Project-text">A modern responsive portfolio design with animations.</p>
+          <a href="Piano.html" target="_blank" class="Project-Visit">View</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
   <section id="Contact">
     <div class="container">
@@ -256,10 +286,10 @@
 
         <form action="https://formspree.io/f/mqadjkea" method="POST">
           <div class="mb-3">
-            <input type="text" class="form-control" style="color: dodgerblue;" name="Name" placeholder="Your Name" required>
+            <input type="text" class="form-control" style="color: dodgerblue;" name="Name" placeholder="Your Name">
           </div>
           <div class="mb-3">
-            <input type="email" class="form-control" style="color: dodgerblue;" name="email" placeholder="Email" required>
+            <input type="email" class="form-control" style="color: dodgerblue;" name="email" placeholder="Email">
           </div>
           <div class="mb-3">
             <textarea class="form-control" style="color: dodgerblue;" name="message" rows="5" placeholder="Write your message here..."
@@ -267,7 +297,7 @@
           </div>
           <button type="submit" class="btn btn-primary">Send Message</button>
         </form>
-
+        
         <div class="social-icons mt-4">
           <a href="https://www.facebook.com/share/1B3DNezn8Q/" target="_blank" class="social-link facebook"><i
               class="fab fa-facebook-f"></i></a>
