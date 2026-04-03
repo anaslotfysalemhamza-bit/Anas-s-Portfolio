@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="تسبيحة برو - أفضل مسبحة إلكترونية احترافية مع إحصائيات دقيقة، أهداف يومية، ورسوم بيانية متقدمة">
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>تسبيحة برو | المسبحة الذكية الفائقة</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js للإحصائيات المتقدمة -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --secondary: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* خلفية متحركة */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 2px, transparent 2px);
+            background-size: 50px 50px;
+            animation: floatBg 25s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatBg {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(80px, 80px) rotate(360deg); }
+        }
+
+        /* الوضع المظلم */
+        body.dark {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+
+        body.dark::before {
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 2px, transparent 2px);
+        }
+
+        /* الحاوية الرئيسية */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* شريط الحالة العلوي */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.25);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .date-time {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .stats-badge {
+            background: rgba(0,0,0,0.35);
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        /* البطاقة الرئيسية */
+        .main-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
+            padding: 28px 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* عداد احترافي */
+        .counter-wrapper {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .counter-number {
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #ffd700, #f59e0b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 40px rgba(255,215,0,0.3);
+            letter-spacing: 8px;
+            font-family: 'Cairo', monospace;
+        }
+
+        .counter-sub {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* زر التسبيح السحري */
+        .magic-bead {
+            width: 260px;
+            height: 260px;
+            margin: 15px auto;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bead-outer {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #ffd89b, #c7a55b);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 25px 35px rgba(0,0,0,0.4), inset 0 -6px 0 #8b691b, inset 0 6px 15px rgba(255,255,255,0.6);
+            transition: transform 0.08s linear;
+        }
+
+        .bead-inner {
+            width: 82%;
+            height: 82%;
+            background: radial-gradient(circle at 35% 35%, #fff5e0, #e8cfa0);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.1), 0 6px 12px rgba(255,255,255,0.5);
+        }
+
+        .bead-dhikr {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #5c3a1a;
+        }
+
+        .bead-icon {
+            font-size: 1.8rem;
+            color: #d4a373;
+        }
+
+        .magic-bead:active .bead-outer {
+            transform: scale(0.95);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.4), inset 0 -3px 0 #8b691b;
+        }
+
+        /* أزرار الأذكار */
+        .dhikr-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .dhikr-option {
+            background: rgba(0,0,0,0.35);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            backdrop-filter: blur(5px);
+        }
+
+        .dhikr-option.active {
+            background: linear-gradient(135deg, #ffd700, #f59e0b);
+            color: #2d1b0a;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+            transform: scale(1.02);
+        }
+
+        /* لوحة الأهداف */
+        .goals-panel {
+            background: rgba(0,0,0,0.25);
+            border-radius: 40px;
+            padding: 14px;
+            margin: 15px 0;
+        }
+
+        .goals-title {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .goals-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .goal-btn {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .goal-btn.active {
+            background: var(--success);
+            box-shadow: 0 0 15px var(--success);
+        }
+
+        .progress-bar-container {
+            margin-top: 14px;
+            background: rgba(0,0,0,0.35);
+            border-radius: 30px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #f59e0b);
+            border-radius: 30px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* إحصائيات */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .stat-card-glass {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 14px 8px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s;
+        }
+
+        .stat-card-glass:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .stat-value-lg {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffd700;
+        }
+
+        .stat-label-sm {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 4px;
+        }
+
+        /* الرسم البياني */
+        .chart-container {
+            background: rgba(0,0,0,0.2);
+            border-radius: 28px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        canvas {
+            max-height: 170px;
+            width: 100%;
+        }
+
+        /* سجل التسبيحات */
+        .logs-container {
+            background: rgba(0,0,0,0.2);
+            border-radius: 28px;
+            padding: 16px;
+            margin-top: 15px;
+        }
+
+        .logs-header {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+        }
+
+        .logs-list {
+            max-height: 140px;
+            overflow-y: auto;
+        }
+
+        .log-item {
+            background: rgba(255,255,255,0.08);
+            margin: 6px 0;
+            padding: 10px 16px;
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .log-item:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateX(5px);
+        }
+
+        /* أزرار التحكم */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .action-btn-glass {
+            flex: 1;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 14px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-btn-glass:active {
+            transform: scale(0.97);
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* مؤثرات إضافية */
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 20px gold; }
+            50% { text-shadow: 0 0 50px #ffd700; }
+        }
+
+        .achievement-glow {
+            animation: glowPulse 0.5s ease;
+        }
+
+        .floating-tasbeeh {
+            position: fixed;
+            font-size: 1.2rem;
+            pointer-events: none;
+            animation: floatUp 1s ease-out forwards;
+            z-index: 1000;
+            font-weight: bold;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,0,0.5), transparent);
+            transform: scale(0);
+            animation: rippleAnim 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Scrollbar */
+        .logs-list::-webkit-scrollbar { width: 4px; }
+        .logs-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .logs-list::-webkit-scrollbar-thumb { background: #ffd700; border-radius: 10px; }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .magic-bead { width: 210px; height: 210px; }
+            .counter-number { font-size: 4rem; letter-spacing: 5px; }
+            .stats-grid { gap: 8px; }
+            .stat-value-lg { font-size: 1.2rem; }
+            .bead-dhikr { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <!-- شريط الحالة -->
+    <div class="status-bar">
+        <div class="date-time" id="liveDateTime"></div>
+        <div class="stats-badge" id="streakBadge">🔥 0 يوم</div>
+        <i class="fas fa-moon" id="darkModeToggle" style="cursor:pointer; font-size:1.2rem; transition: transform 0.2s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'"></i>
+    </div>
+
+    <!-- البطاقة الرئيسية -->
+    <div class="main-card">
+        <div class="counter-wrapper">
+            <div class="counter-number" id="mainCounter">0</div>
+            <div class="counter-sub" id="currentDhikrLabel">سبحان الله</div>
+        </div>
+
+        <!-- زر التسبيح السحري -->
+        <div class="magic-bead" id="tasbeehBtn">
+            <div class="bead-outer">
+                <div class="bead-inner">
+                    <div class="bead-dhikr" id="beadDhikrText">سُبْحَانَ اللَّه</div>
+                    <div class="bead-icon"><i class="fas fa-pray"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- اختيار الذكر -->
+        <div class="dhikr-selector" id="dhikrSelector">
+            <button class="dhikr-option active" data-dhikr="سبحان الله">سبحان الله</button>
+            <button class="dhikr-option" data-dhikr="الحمد لله">الحمد لله</button>
+            <button class="dhikr-option" data-dhikr="الله أكبر">الله أكبر</button>
+            <button class="dhikr-option" data-dhikr="لا إله إلا الله">لا إله إلا الله</button>
+        </div>
+
+        <!-- الأهداف -->
+        <div class="goals-panel">
+            <div class="goals-title">🎯 الهدف اليومي</div>
+            <div class="goals-buttons" id="goalButtons">
+                <button class="goal-btn" data-goal="33">33</button>
+                <button class="goal-btn active" data-goal="99">99</button>
+                <button class="goal-btn" data-goal="500">500</button>
+                <button class="goal-btn" data-goal="1000">1000</button>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="goals-title" style="margin-top:8px; text-align:center;" id="progressText">0 / 99</div>
+        </div>
+
+        <!-- إحصائيات سريعة -->
+        <div class="stats-grid">
+            <div class="stat-card-glass">
+                <div class="stat-value-lg" id="todayStat">0</div>
+                <div class="stat-label-sm">تسبيحات اليوم</div>
+            </div>
+            <div class="stat-card-glass">
+                <div class="stat-value-lg" id="weekStat">0</div>
+                <div class="stat-label-sm">هذا الأسبوع</div>
+            </div>
+            <div class="stat-card-glass">
+                <div class="stat-value-lg" id="totalStat">0</div>
+                <div class="stat-label-sm">الإجمالي الكلي</div>
+            </div>
+        </div>
+
+        <!-- الرسم البياني -->
+        <div class="chart-container">
+            <canvas id="weeklyChart" width="400" height="160"></canvas>
+        </div>
+
+        <!-- سجل التسبيحات -->
+        <div class="logs-container">
+            <div class="logs-header">
+                <span><i class="fas fa-history"></i> آخر التسبيحات</span>
+                <span id="sessionCount">الجلسة: 0</span>
+            </div>
+            <div class="logs-list" id="logsList">
+                <div style="text-align:center; color:rgba(255,255,255,0.5); padding:20px;">لا توجد تسبيحات بعد</div>
+            </div>
+        </div>
+
+        <!-- أزرار التحكم -->
+        <div class="action-buttons">
+            <button class="action-btn-glass" id="resetSessionBtn"><i class="fas fa-undo-alt"></i> تصفير</button>
+            <button class="action-btn-glass" id="saveDataBtn"><i class="fas fa-cloud-save"></i> حفظ</button>
+            <button class="action-btn-glass" id="exportBtn"><i class="fas fa-share-alt"></i> مشاركة</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ======================= التطبيق الاحترافي المتكامل =======================
+        class ProTasbeehApp {
+            constructor() {
+                this.dhikrs = {
+                    'سبحان الله': { count: 0, text: 'سُبْحَانَ اللَّه' },
+                    'الحمد لله': { count: 0, text: 'الحَمْدُ لِلَّه' },
+                    'الله أكبر': { count: 0, text: 'اللَّهُ أَكْبَر' },
+                    'لا إله إلا الله': { count: 0, text: 'لَا إِلَٰهَ إِلَّا اللَّه' }
+                };
+                this.currentDhikr = 'سبحان الله';
+                this.sessionCount = 0;
+                this.dailyGoal = 99;
+                this.totalEver = 0;
+                this.dailyLogs = [];
+                this.weeklyData = [0,0,0,0,0,0,0];
+                this.streak = 0;
+                this.chart = null;
+                this.init();
+            }
+            
+            init() {
+                this.loadAllData();
+                this.updateAllUI();
+                this.startLiveClock();
+                this.bindEvents();
+                this.initChart();
+                this.checkDailyReset();
+            }
+            
+            loadAllData() {
+                const saved = localStorage.getItem('pro_tasbeeh');
+                if (saved) {
+                    try {
+                        const data = JSON.parse(saved);
+                        this.dhikrs = data.dhikrs || this.dhikrs;
+                        this.totalEver = data.totalEver || 0;
+                        this.weeklyData = data.weeklyData || [0,0,0,0,0,0,0];
+                        this.streak = data.streak || 0;
+                        this.dailyGoal = data.dailyGoal || 99;
+                        this.currentDhikr = data.currentDhikr || 'سبحان الله';
+                    } catch(e) {}
+                }
+                this.sessionCount = this.dhikrs[this.currentDhikr]?.count || 0;
+                const today = new Date().toDateString();
+                const savedLogs = localStorage.getItem('daily_logs_' + today);
+                this.dailyLogs = savedLogs ? JSON.parse(savedLogs) : [];
+            }
+            
+            saveAllData() {
+                const toSave = {
+                    dhikrs: this.dhikrs,
+                    totalEver: this.totalEver,
+                    weeklyData: this.weeklyData,
+                    streak: this.streak,
+                    dailyGoal: this.dailyGoal,
+                    currentDhikr: this.currentDhikr
+                };
+                localStorage.setItem('pro_tasbeeh', JSON.stringify(toSave));
+                const today = new Date().toDateString();
+                localStorage.setItem('daily_logs_' + today, JSON.stringify(this.dailyLogs));
+            }
+            
+            checkDailyReset() {
+                const lastDate = localStorage.getItem('last_active_date');
+                const today = new Date().toDateString();
+                if (lastDate !== today) {
+                    this.weeklyData.shift();
+                    this.weeklyData.push(0);
+                    if (lastDate) {
+                        const last = new Date(lastDate);
+                        const diff = Math.floor((new Date(today) - last) / (1000*60*60*24));
+                        if (diff === 1) this.streak++;
+                        else if (diff > 1) this.streak = 0;
+                    }
+                    localStorage.setItem('last_active_date', today);
+                    this.saveAllData();
+                }
+                this.updateWeeklyData();
+            }
+            
+            updateWeeklyData() {
+                let todayTotal = 0;
+                for(let dh in this.dhikrs) todayTotal += this.dhikrs[dh].count;
+                const dayIndex = new Date().getDay();
+                this.weeklyData[dayIndex] = todayTotal;
+                if(this.chart) this.updateChart();
+            }
+            
+            getTodayTotal() {
+                let total = 0;
+                for(let dh in this.dhikrs) total += this.dhikrs[dh].count;
+                return total;
+            }
+            
+            increment() {
+                this.dhikrs[this.currentDhikr].count++;
+                this.sessionCount = this.dhikrs[this.currentDhikr].count;
+                this.totalEver++;
+                this.updateWeeklyData();
+                
+                this.dailyLogs.unshift({
+                    dhikr: this.currentDhikr,
+                    time: new Date().toLocaleTimeString('ar-EG'),
+                    total: this.sessionCount
+                });
+                if(this.dailyLogs.length > 15) this.dailyLogs.pop();
+                
+                this.createFloatingText();
+                this.animateCounter();
+                this.createRipple();
+                
+                const todayTotal = this.getTodayTotal();
+                if(todayTotal === this.dailyGoal) {
+                    this.showAchievement(`🎉 أتممت ${this.dailyGoal} تسبيحة! 🎉`);
+                    this.celebrateConfetti();
+                }
+                
+                this.updateAllUI();
+                this.saveAllData();
+                if(this.chart) this.updateChart();
+            }
+            
+            resetSession() {
+                if(confirm('هل تريد تصفير تسبيحات الذكر الحالي فقط؟')) {
+                    this.dhikrs[this.currentDhikr].count = 0;
+                    this.sessionCount = 0;
+                    this.updateAllUI();
+                    this.saveAllData();
+                    this.showToast('تم تصفير الجلسة', '#ef4444');
+                }
+            }
+            
+            changeDhikr(dhikrName) {
+                this.currentDhikr = dhikrName;
+                this.sessionCount = this.dhikrs[dhikrName].count;
+                this.updateAllUI();
+                this.saveAllData();
+                this.showToast(`الذكر: ${dhikrName}`, '#10b981');
+            }
+            
+            setGoal(goal) {
+                this.dailyGoal = goal;
+                this.saveAllData();
+                this.updateUI_GoalAndProgress();
+                this.showToast(`الهدف: ${goal} تسبيحة`, '#f59e0b');
+            }
+            
+            updateAllUI() {
+                document.getElementById('mainCounter').innerText = this.sessionCount;
+                document.getElementById('currentDhikrLabel').innerText = this.currentDhikr;
+                document.getElementById('beadDhikrText').innerHTML = this.dhikrs[this.currentDhikr].text;
+                
+                const todayTotal = this.getTodayTotal();
+                document.getElementById('todayStat').innerText = todayTotal;
+                document.getElementById('totalStat').innerText = this.totalEver;
+                document.getElementById('sessionCount').innerHTML = `الجلسة: ${this.sessionCount}`;
+                
+                const weekTotal = this.weeklyData.reduce((a,b)=>a+b,0);
+                document.getElementById('weekStat').innerText = weekTotal;
+                document.getElementById('streakBadge').innerHTML = `🔥 ${this.streak} يوم`;
+                
+                const logsContainer = document.getElementById('logsList');
+                if(this.dailyLogs.length === 0) {
+                    logsContainer.innerHTML = '<div style="text-align:center; color:rgba(255,255,255,0.5); padding:20px;">لا توجد تسبيحات بعد</div>';
+                } else {
+                    logsContainer.innerHTML = this.dailyLogs.map(log => `
+                        <div class="log-item">
+                            <span>📿 ${log.dhikr}</span>
+                            <span>${log.time} | ${log.total}</span>
+                        </div>
+                    `).join('');
+                }
+                
+                this.updateUI_GoalAndProgress();
+                
+                document.querySelectorAll('.dhikr-option').forEach(btn => {
+                    if(btn.dataset.dhikr === this.currentDhikr) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.goal-btn').forEach(btn => {
+                    if(parseInt(btn.dataset.goal) === this.dailyGoal) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                });
+            }
+            
+            updateUI_GoalAndProgress() {
+                const todayTotal = this.getTodayTotal();
+                const percent = Math.min(100, (todayTotal / this.dailyGoal) * 100);
+                document.getElementById('progressFill').style.width = percent + '%';
+                document.getElementById('progressText').innerHTML = `${todayTotal} / ${this.dailyGoal}`;
+            }
+            
+            createFloatingText() {
+                const div = document.createElement('div');
+                div.className = 'floating-tasbeeh';
+                div.innerHTML = '🤲 ' + this.currentDhikr;
+                div.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+                div.style.bottom = '180px';
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 1000);
+            }
+            
+            createRipple() {
+                const btn = document.getElementById('tasbeehBtn');
+                const rect = btn.getBoundingClientRect();
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.width = ripple.style.height = rect.width + 'px';
+                ripple.style.left = rect.left + 'px';
+                ripple.style.top = rect.top + 'px';
+                document.body.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            }
+            
+            animateCounter() {
+                const el = document.getElementById('mainCounter');
+                el.classList.add('achievement-glow');
+                setTimeout(() => el.classList.remove('achievement-glow'), 500);
+            }
+            
+            showToast(msg, color) {
+                const toast = document.createElement('div');
+                toast.innerText = msg;
+                toast.style.cssText = `
+                    position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+                    background: ${color}; color: white; padding: 12px 24px;
+                    border-radius: 60px; z-index: 10000; font-weight: bold;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: fadeInUp 0.3s ease;
+                `;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 1500);
+            }
+            
+            showAchievement(msg) {
+                const ach = document.createElement('div');
+                ach.innerText = msg;
+                ach.style.cssText = `
+                    position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%);
+                    background: gold; color: #2d1b0a; padding: 20px 30px;
+                    border-radius: 60px; font-size: 1.3rem; font-weight: bold;
+                    z-index: 10001; box-shadow: 0 0 50px gold; text-align: center;
+                    animation: fadeInUp 0.4s ease;
+                `;
+                document.body.appendChild(ach);
+                setTimeout(() => ach.remove(), 2000);
+            }
+            
+            celebrateConfetti() {
+                for(let i=0;i<40;i++) {
+                    const conf = document.createElement('div');
+                    conf.style.cssText = `
+                        position: fixed; width: 10px; height: 10px;
+                        background: hsl(${Math.random()*360}, 100%, 50%);
+                        left: ${Math.random() * window.innerWidth}px; top: -10px;
+                        pointer-events: none; z-index: 9999;
+                    `;
+                    document.body.appendChild(conf);
+                    conf.animate([
+                        { transform: `translateY(0px) rotate(0deg)`, opacity: 1 },
+                        { transform: `translateY(${window.innerHeight}px) rotate(${Math.random()*360}deg)`, opacity: 0 }
+                    ], { duration: 1500 }).onfinish = () => conf.remove();
+                }
+            }
+            
+            exportData() {
+                const dataStr = JSON.stringify({
+                    dhikrs: this.dhikrs,
+                    totalEver: this.totalEver,
+                    streak: this.streak,
+                    exportDate: new Date().toISOString()
+                }, null, 2);
+                const blob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `tasbeeh_backup_${Date.now()}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                this.showToast('تم تصدير البيانات', '#10b981');
+            }
+            
+            initChart() {
+                const ctx = document.getElementById('weeklyChart').getContext('2d');
+                this.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['أحد', 'إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                        datasets: [{
+                            label: 'تسبيحات',
+                            data: this.weeklyData,
+                            borderColor: '#ffd700',
+                            backgroundColor: 'rgba(255,215,0,0.08)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#f59e0b',
+                            pointBorderColor: '#fff',
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: { legend: { labels: { color: 'white', font: { size: 10 } } } },
+                        scales: {
+                            y: { ticks: { color: 'white', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.08)' } },
+                            x: { ticks: { color: 'white' }, grid: { display: false } }
+                        }
+                    }
+                });
+            }
+            
+            updateChart() {
+                if(this.chart) {
+                    this.chart.data.datasets[0].data = this.weeklyData;
+                    this.chart.update();
+                }
+            }
+            
+            startLiveClock() {
+                const update = () => {
+                    const now = new Date();
+                    document.getElementById('liveDateTime').innerHTML = now.toLocaleDateString('ar-EG') + ' ' + now.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+                };
+                update();
+                setInterval(update, 60000);
+            }
+            
+            bindEvents() {
+                document.getElementById('tasbeehBtn').addEventListener('click', () => this.increment());
+                document.getElementById('resetSessionBtn').addEventListener('click', () => this.resetSession());
+                document.getElementById('saveDataBtn').addEventListener('click', () => this.saveAllData());
+                document.getElementById('exportBtn').addEventListener('click', () => this.exportData());
+                document.getElementById('darkModeToggle').addEventListener('click', () => document.body.classList.toggle('dark'));
+                
+                document.querySelectorAll('.dhikr-option').forEach(btn => {
+                    btn.addEventListener('click', () => this.changeDhikr(btn.dataset.dhikr));
+                });
+                
+                document.querySelectorAll('.goal-btn').forEach(btn => {
+                    btn.addEventListener('click', () => this.setGoal(parseInt(btn.dataset.goal)));
+                });
+            }
+        }
+        
+        new ProTasbeehApp();
+    })();
+</script>
+</body>
+</html>
